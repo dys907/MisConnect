@@ -60,6 +60,8 @@ exports.findOne = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: "No query exists with the id: " + id });
+            } else {
+                res.send(data);
             }
         })
         .catch(err => {
@@ -79,13 +81,13 @@ exports.update = (req, res) => {
             })
     }
     
-    const id = req.param.id;
+    const id = req.params.id;
 
     Profsearch.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: 'id: ${id} was not found, update unsuccessful'
+                    message: `id: ${id} was not found, update unsuccessful`
                 })
             } else {
                 res.send({
@@ -106,11 +108,11 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    Profsearch.findByIdandRemove(id)
+    Profsearch.findByIdAndRemove(id)
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: 'id: ${id} was not found, deletion unsuccessful'
+                    message: `id: ${id} was not found, deletion unsuccessful`
                 })
             } else {
                 res.send({
