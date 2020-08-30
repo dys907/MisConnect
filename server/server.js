@@ -1,6 +1,6 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
+const { Mongoose } = require("mongoose");
 
 const app = express();
 
@@ -16,10 +16,28 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+
+//connect mongodb
+const db = require("../server/models");
+db.mongoose
+  .connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(()=> {
+    console.log("Connected to the database");
+  })
+  .catch(err => {
+    console.log("Cannot connect to the database", err);
+    process.exit();
+  })
+
 // simple route
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+require("../server/routes/profsearch.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
