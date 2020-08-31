@@ -1,6 +1,5 @@
 module.exports = app => {
     const profsearch = require("../controllers/profsearch.controller.js");
-  
     var router = require("express").Router();
   
     // Create a new profile search
@@ -18,7 +17,7 @@ module.exports = app => {
     // Delete a profile search with id
     router.delete("/:id", profsearch.delete);
   
-    // Create a new profile search
+    // Delete all profile searches
     router.delete("/", profsearch.deleteAll);
   
 

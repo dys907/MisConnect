@@ -144,9 +144,3 @@ exports.deleteAll = (req, res) => {
       })
     })
 }
-
-//not sure about this one
-// exports.findAllPublished = (req, res) => {
-
-
-// }
