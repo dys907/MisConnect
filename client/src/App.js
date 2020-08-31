@@ -12,6 +12,7 @@ import './App.css';
 import AddProfileSearch from "./components/AddProfileSearch";
 import ProfileSearch from "./components/ProfileSearch";
 import ProfileSearchList from "./components/ProfileSearchList";
+import Home from "./components/Home";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     <Router>
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/profilesearch" className="navbar-brand">
+          <a href="/" className="navbar-brand">
             MisConnect
           </a>
           <div className= "navbar-nav mr-auto">
@@ -42,9 +43,11 @@ function App() {
         <div className="container mt-3">
 
           <Switch>
-            <Route exact path={["/", "/searches"]} component={ProfileSearchList} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/searches" component={ProfileSearchList} />
             <Route exact path="/add" component={AddProfileSearch} />
-            <Route path="/searches/:id" component={ProfileSearch} />
+
+            <Route path="/profilesearch/:id" component={ProfileSearch} />
           </Switch>
         </div>
         
