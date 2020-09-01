@@ -2,8 +2,15 @@ const db = require("../models");
 const User = db.user;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require("../../server/middleware/auth.js");
 
-//Creates new user
+/**
+ * @route POST api/auth
+ * @desc Auth user
+ * @access Public
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.create = (req, res) => {
     const {email, password} = req.body;
 
@@ -34,12 +41,21 @@ exports.create = (req, res) => {
                                 name: user.name,
                                 email: user.email,
                             })
-                        }
-                        );
+                        });
                 })
-
-
         })
+}
 
 
+/**
+ * @route GET api/auth/user
+ * @desc Get user data without the password
+ * @access Private
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.findOne = (req, res) => {
+    User.findById(req.user.id)
+    .select('-password')
+    .then(user => res.json(user));
 }

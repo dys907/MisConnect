@@ -3,7 +3,7 @@ module.exports = mongoose => {
     let schema = mongoose.Schema(
         {
             name: String,
-            age: String,
+            age: Number,
             city: String,
             description: String
         },
