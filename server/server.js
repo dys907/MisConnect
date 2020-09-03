@@ -20,10 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 //connect mongodb
 const db = require("./models");
 
-const config = process.env.DBCONFIG || db.url;
+console.log(db.url);
 
 db.mongoose
-  .connect(config, {
+  .connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-require("../server/routes/profsearch.routes")(app);
+require("./routes/profsearch.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
