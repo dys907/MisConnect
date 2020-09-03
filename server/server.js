@@ -19,8 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 
 //connect mongodb
 const db = require("./models");
+
+const config = process.env.DBCONFIG || db.url;
+
 db.mongoose
-  .connect(db.url, {
+  .connect(config, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
