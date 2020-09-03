@@ -24,7 +24,7 @@ const removeAll = () => {
 const findByName = (rec_name, app) => {
     return http.get(`/profsearch?rec_name=${rec_name}&app=${app}`);
 }
-
+ 
 export default {
     getAll,
     get,
