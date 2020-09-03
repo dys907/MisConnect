@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //connect mongodb
-const db = require("../server/models");
+const db = require("./models");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 require("../server/routes/profsearch.routes")(app);
 // set port, listen for requests
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
