@@ -3,65 +3,65 @@ import ProfileSearchService from "../services/ProfileSearchService";
 import { Link } from "react-router-dom";
 
 const ProfileSearchList = () => {
-    const [profileSearch, setProfileSearch] = useState([]);
-    const [currentProfile, setCurrentProfile] = useState(null);
-    const [currentIndex, setCurrentIndex] = useState(-1);
-    const [searchName, setSearchName] = useState("");
+  const [profileSearch, setProfileSearch] = useState([]);
+  const [currentProfile, setCurrentProfile] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [searchName, setSearchName] = useState("");
 
-    useEffect(() => {
-        retrieveProfiles();
-    }, []);
-    
-    const onChangeSearchTitle = event => {
-        const searchName = event.target.value;
-        setSearchName(searchName);
-    }
-    
-    const retrieveProfiles = () => {
-        ProfileSearchService.getAll()
-            .then(response => {
-                setProfileSearch(response.data);
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            })
-    }
-    
-    const refreshList = () => {
-        retrieveProfiles();
-        setCurrentProfile(null);
-        setCurrentIndex(-1);
-    }
-    
-    const setActiveProfile = (profile, index) => {
-        setCurrentProfile(profile);
-        setCurrentIndex(index);
-    }
-    
-    const removeAllProfiles = () => {
-        ProfileSearchService.removeAll()
-        .then(response => {
-            console.log(response.data);
-            refreshList();
-        })
-        .catch(e => {
-            console.log(e);
-        })
-    }
-    
-    const findByName = () => {
-        ProfileSearchService.findByName(searchName)
-        .then(response => {
-            setProfileSearch(response.data);
-            console.log(response.data);
-        })
-        .catch(e => {
-            console.log(e);
-        })
-    }
-    return(
-        <div className="list row">
+  useEffect(() => {
+    retrieveProfiles();
+  }, []);
+
+  const onChangeSearchTitle = event => {
+    const searchName = event.target.value;
+    setSearchName(searchName);
+  }
+
+  const retrieveProfiles = () => {
+    ProfileSearchService.getAll()
+      .then(response => {
+        setProfileSearch(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }
+
+  const refreshList = () => {
+    retrieveProfiles();
+    setCurrentProfile(null);
+    setCurrentIndex(-1);
+  }
+
+  const setActiveProfile = (profile, index) => {
+    setCurrentProfile(profile);
+    setCurrentIndex(index);
+  }
+
+  const removeAllProfiles = () => {
+    ProfileSearchService.removeAll()
+      .then(response => {
+        console.log(response.data);
+        refreshList();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }
+
+  const findByName = () => {
+    ProfileSearchService.findByName(searchName, "tinder")
+      .then(response => {
+        setProfileSearch(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }
+  return (
+    <div className="list row">
       <div className="col-md-8">
         <div className="input-group mb-3">
           <input
@@ -95,7 +95,8 @@ const ProfileSearchList = () => {
                 onClick={() => setActiveProfile(profile, index)}
                 key={index}
               >
-                {profile.name}
+                {profile.rec_name}
+                {profile.rec_age}
               </li>
             ))}
         </ul>
@@ -120,14 +121,14 @@ const ProfileSearchList = () => {
 
             <div>
               <label>
-              <strong>Age:</strong>
+                <strong>Age:</strong>
               </label>{" "}
               {currentProfile.age}
             </div>
 
             <div>
               <label>
-              <strong>city:</strong>
+                <strong>city:</strong>
               </label>{" "}
               {currentProfile.city}
             </div>
@@ -141,14 +142,14 @@ const ProfileSearchList = () => {
 
           </div>
         ) : (
-          <div>
-            <br />
-            <p>Please click on a Profile</p>
-          </div>
-        )}
+            <div>
+              <br />
+              <p>Please click on a Profile</p>
+            </div>
+          )}
       </div>
     </div>
-    )
+  )
 }
 
 

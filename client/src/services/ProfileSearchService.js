@@ -4,6 +4,7 @@ const getAll = () => {
     return http.get("/profsearch");
 }
 
+
 const get = id => {
     return http.get(`/profsearch/${id}`);
 }
@@ -20,8 +21,8 @@ const remove = id => {
 const removeAll = () => {
     return http.delete("/profsearch");
 }
-const findByName = name => {
-    return http.get(`/profsearch?name=${name}`);
+const findByName = (rec_name, app) => {
+    return http.get(`/profsearch?rec_name=${rec_name}&app=${app}`);
 }
 
 export default {

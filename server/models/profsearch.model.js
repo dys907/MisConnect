@@ -2,10 +2,17 @@ module.exports = mongoose => {
 
     let schema = mongoose.Schema(
         {
-            name: String,
-            age: Number,
-            city: String,
-            description: String
+            sender_name: String,
+            sender_age: String,
+            sender_city: String,
+            email: String,
+            app: String,
+            rec_name: String,
+            rec_age: String,
+            rec_city: String,
+            description: String,
+            question: String,
+            answer: String
         },
         {timestamps: true}
     )

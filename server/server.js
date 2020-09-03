@@ -38,8 +38,6 @@ app.get("/", (req, res) => {
 });
 
 require("../server/routes/profsearch.routes")(app);
-require("../server/routes/user.routes")(app);
-require("../server/routes/auth.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
